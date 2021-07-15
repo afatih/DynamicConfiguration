@@ -47,7 +47,7 @@ var SiteName = await _dynamicConfigurationProvider.GetValue<string>("SiteName")
 ## Project View
 
 ### Main Screen
-![Project picture1](https://github.com/afatih/DynamicConfiguration/blob/master/screenShoots/mainScreen.png)
+![Project picture1](https://github.com/afatih/DynamicConfiguration/blob/master/screenShoots/mainScreen2.png)
 
 ### Create-Edit Screen
 ![Project picture2](https://github.com/afatih/DynamicConfiguration/blob/master/screenShoots/editScreen.png)
