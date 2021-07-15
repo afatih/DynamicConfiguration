@@ -19,6 +19,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicConfiguration.Infras
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicConfiguration.Web", "src\Presentation\DynamicConfiguration.Web\DynamicConfiguration.Web.csproj", "{437858BA-49AE-421B-A3BC-9A5C6E88A6D3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sqlScripts", "sqlScripts", "{A1EE1DAC-493C-41AC-B09D-3C23AB995EE9}"
+	ProjectSection(SolutionItems) = preProject
+		CreateAndFillConfigurationTable.sql = CreateAndFillConfigurationTable.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "screenShoots", "screenShoots", "{08CF61AE-5F7E-4A86-8D5C-8837E77CD202}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

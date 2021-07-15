@@ -1,6 +1,6 @@
 ﻿namespace DynamicConfiguration.ConfigurationReader.Model
 {
-    public class BeymenProviderOptions
+    public class DynamicConfigurationProviderOptions
     {
         public string ApplicationName { get; set; }
         public string ConnectionString { get; set; }

@@ -25,14 +25,15 @@ namespace DynamicConfiguration.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IBeymenConfigurationProvider>(factory =>
+            services.AddSingleton<IDynamicConfigurationProvider>(factory =>
             {
                 var memoryCache = factory.GetRequiredService<IMemoryCache>();
-                var options = new BeymenProviderOptions
+                var options = new DynamicConfigurationProviderOptions
                 {
                     ApplicationName = Configuration.GetSection("ConfigurationSettings:ApplicationName").Value,
                     ConnectionString = Configuration.GetSection("ConfigurationSettings:ConnectionString").Value,
-                    RefreshTimerIntervalInMs = Convert.ToDouble(Configuration.GetSection("ConfigurationSettings:RefreshTimerIntervalInMs").Value)
+                    RefreshTimerIntervalInMs = Convert.ToDouble
+                        (Configuration.GetSection("ConfigurationSettings:RefreshTimerIntervalInMs").Value)
                 };
                 return new SqlServerConfigurationProvider(memoryCache, options);
             });

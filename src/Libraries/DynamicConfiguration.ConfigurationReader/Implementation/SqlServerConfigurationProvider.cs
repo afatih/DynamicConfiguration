@@ -12,14 +12,14 @@ using System.Timers;
 
 namespace DynamicConfiguration.ConfigurationReader.Implementation
 {
-    public class SqlServerConfigurationProvider : IBeymenConfigurationProvider
+    public class SqlServerConfigurationProvider : IDynamicConfigurationProvider
     {
         private const string CacheKey = "BeymenConfigurations";
         private readonly IMemoryCache _memoryCache;
         private readonly Timer _timer;
-        private readonly BeymenProviderOptions _options;
+        private readonly DynamicConfigurationProviderOptions _options;
 
-        public SqlServerConfigurationProvider(IMemoryCache memoryCache, BeymenProviderOptions options)
+        public SqlServerConfigurationProvider(IMemoryCache memoryCache, DynamicConfigurationProviderOptions options)
         {
             _options = options;
             _memoryCache = memoryCache;

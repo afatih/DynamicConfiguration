@@ -10,14 +10,16 @@ namespace DynamicConfiguration.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly IBeymenConfigurationProvider _beymenConfigurationProvider;
+        private readonly IDynamicConfigurationProvider _beymenConfigurationProvider;
         private readonly IMapper _mapper;
-        public HomeController(IBeymenConfigurationProvider beymenConfigurationProvider,
+
+        public HomeController(IDynamicConfigurationProvider beymenConfigurationProvider,
             IMapper mapper)
         {
             _beymenConfigurationProvider = beymenConfigurationProvider;
             _mapper = mapper;
         }
+
         [HttpGet]
         public async Task<IActionResult> Index(ConfigurationViewModel model)
         {

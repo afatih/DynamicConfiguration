@@ -2,12 +2,9 @@
 
 namespace DynamicConfiguration.ConfigurationReader.Interface
 {
-    public interface IBeymenConfigurationProvider
+    public interface IDynamicConfigurationProvider
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+
         Task<T> GetValue<T>(string key);
     }
 }
