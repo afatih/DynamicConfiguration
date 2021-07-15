@@ -36,12 +36,13 @@ var SiteName = await _dynamicConfigurationProvider.GetValue<string>("SiteName")
 
 ## Used Technologies
  - .Net 5.0
-  - LocalCache
+  - Local in-memory cache
   - GenericRepository and UnitOfWork
   - CQRS and Mediator
   - MSSQL for DB connection
   - Dapper as ORM tool
   - ASP .NET Core MVC for Ui.
+  - XUnit for unit test.
   - Layered architecture. 
 
 ## Project View

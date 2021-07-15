@@ -9,15 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{98D9F8B4-706E-4E77-974B-903881851C1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicConfiguration.Application", "src\Libraries\DynamicConfiguration.Application\DynamicConfiguration.Application.csproj", "{828AF9A2-9EA8-42C4-B2C1-E8F05E30BAC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicConfiguration.Application", "src\Libraries\DynamicConfiguration.Application\DynamicConfiguration.Application.csproj", "{828AF9A2-9EA8-42C4-B2C1-E8F05E30BAC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicConfiguration.ConfigurationReader", "src\Libraries\DynamicConfiguration.ConfigurationReader\DynamicConfiguration.ConfigurationReader.csproj", "{ADF0DB92-7BBA-4283-BF30-DBE3B3BD3554}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicConfiguration.ConfigurationReader", "src\Libraries\DynamicConfiguration.ConfigurationReader\DynamicConfiguration.ConfigurationReader.csproj", "{ADF0DB92-7BBA-4283-BF30-DBE3B3BD3554}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicConfiguration.Core", "src\Libraries\DynamicConfiguration.Core\DynamicConfiguration.Core.csproj", "{99AADBF7-825E-42E8-ACEE-37B5CFBEA7E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicConfiguration.Core", "src\Libraries\DynamicConfiguration.Core\DynamicConfiguration.Core.csproj", "{99AADBF7-825E-42E8-ACEE-37B5CFBEA7E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicConfiguration.Infrastructure", "src\Libraries\DynamicConfiguration.Infrastructure\DynamicConfiguration.Infrastructure.csproj", "{11F1EB19-EC26-4E48-B38E-21BBAB44CA67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicConfiguration.Infrastructure", "src\Libraries\DynamicConfiguration.Infrastructure\DynamicConfiguration.Infrastructure.csproj", "{11F1EB19-EC26-4E48-B38E-21BBAB44CA67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicConfiguration.Web", "src\Presentation\DynamicConfiguration.Web\DynamicConfiguration.Web.csproj", "{437858BA-49AE-421B-A3BC-9A5C6E88A6D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicConfiguration.Web", "src\Presentation\DynamicConfiguration.Web\DynamicConfiguration.Web.csproj", "{437858BA-49AE-421B-A3BC-9A5C6E88A6D3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sqlScripts", "sqlScripts", "{A1EE1DAC-493C-41AC-B09D-3C23AB995EE9}"
 	ProjectSection(SolutionItems) = preProject
@@ -25,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sqlScripts", "sqlScripts", 
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "screenShoots", "screenShoots", "{08CF61AE-5F7E-4A86-8D5C-8837E77CD202}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FD584202-136D-447B-B472-904EDF15D18B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicConfiguration.Application.UnitTest", "test\DynamicConfiguration.UnitTest\DynamicConfiguration.Application.UnitTest.csproj", "{7AAF0165-2900-44F2-AD07-5B6D34CB3A8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +56,10 @@ Global
 		{437858BA-49AE-421B-A3BC-9A5C6E88A6D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{437858BA-49AE-421B-A3BC-9A5C6E88A6D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{437858BA-49AE-421B-A3BC-9A5C6E88A6D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AAF0165-2900-44F2-AD07-5B6D34CB3A8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AAF0165-2900-44F2-AD07-5B6D34CB3A8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AAF0165-2900-44F2-AD07-5B6D34CB3A8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AAF0165-2900-44F2-AD07-5B6D34CB3A8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +72,7 @@ Global
 		{99AADBF7-825E-42E8-ACEE-37B5CFBEA7E7} = {C0B4194E-D0BC-4337-854E-4696A4DAC034}
 		{11F1EB19-EC26-4E48-B38E-21BBAB44CA67} = {C0B4194E-D0BC-4337-854E-4696A4DAC034}
 		{437858BA-49AE-421B-A3BC-9A5C6E88A6D3} = {98D9F8B4-706E-4E77-974B-903881851C1C}
+		{7AAF0165-2900-44F2-AD07-5B6D34CB3A8E} = {FD584202-136D-447B-B472-904EDF15D18B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8803F762-04EF-4D83-B2AD-A5E469A3D648}
