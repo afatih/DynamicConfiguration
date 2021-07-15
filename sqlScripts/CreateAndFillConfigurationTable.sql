@@ -11,7 +11,7 @@ GO
 CREATE TABLE [dbo].[Configurations](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
-	[Type] [nvarchar](50) NULL,
+	[Type] [nvarchar](50) NOT NULL,
 	[Value] [nvarchar](500) NOT NULL,
 	[IsActive] [bit] NOT NULL,
 	[ApplicationName] [nvarchar](100) NOT NULL,
