@@ -4,6 +4,9 @@
 The purpose of the project is to dynamically access the apikeys kept in appsettings.json or web.config files without deployment or recycle.
 
 ## How It's Work
+
+**Note:** Before running the project, the sql scripts in the [link](https://github.com/afatih/DynamicConfiguration/blob/master/sqlScripts/CreateAndFillConfigurationTable.sql "Sql Scripts") must be run.
+
 Information about API keys is kept in MSSQL db. If there is a part that is added or changed by checking this information at certain time intervals, the local cache is updated. Then, the information about the desired key is retrieved from the cache after the type control is performed.
 
 Here's how we can apply our library to another project in Startup.cs
