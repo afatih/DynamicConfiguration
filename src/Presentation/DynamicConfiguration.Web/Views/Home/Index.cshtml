@@ -1,0 +1,143 @@
+﻿@model ConfigurationViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    form {
+        display: flex;
+    }
+
+    input[type=text] {
+        flex-grow: 1;
+    }
+</style>
+
+<h1>Configurations</h1>
+
+<div>
+    <a asp-action="Create" class="btn btn-success" style="float: right;">Create</a>
+
+    <input type="text" style="width:200px" class="form-control" id="searchText" placeholder="Search" name="searchText" />
+</div>
+
+@if (Model.Configurations != null)
+{
+    <div class="table-responsive" id="configurationTable">
+        <table class="table table-striped va-md" id="launcherSliders">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Value</th>
+                    <th>IsActive</th>
+                    <th>ApplicationName</th>
+                    <th>Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Configurations)
+                {
+                    <tr id="configuration_@item.Id">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Value)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ApplicationName)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="@Url.Action("Edit", new { id = item.Id })" title="Edit"> Update</a>
+                            <a class="btn btn-danger btn-xs" style="color:white;" onclick="Delete('@item.Id')" title="Delete"><i class="fa fa-edit"></i> Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <button class="btn btn-primary" onclick="GetConfigurations()">Get Configurations From Library</button>
+        </div>
+    </div>
+
+    <div class="row" id="testConfigurations" style="display:none">
+        <div class="form-group">
+            <div>
+                <label>Call Time: </label><label id="lblTime"></label>
+            </div>
+            <div>
+                <label><b>Site Name : </b></label><label id="lblSiteName"></label>
+            </div>
+            <div>
+                <label><b>MaxItemCount : </b></label><label id="lblMaxItemCount"></label>
+            </div>
+            <div>
+                <label><b>IsBasketEnabled : </b></label><label id="lblIsBasketEnabled"></label>
+            </div>
+        </div>
+
+    </div>
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(function () {
+        $('#searchText').on("keyup", function () {
+
+            var value = $(this).val().toLowerCase();
+            console.log(value);
+            $("#configurationTable tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+
+    function Delete(id) {
+        if (confirm('Are you sure you want to delete the selected configuration?')) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/Home/Delete',
+                data: { id: id },
+                success: function () {
+                    $('#configuration_' + id).remove();
+                },
+                error: function () {
+                    alert('An error occured.')
+                }
+            })
+        }
+    };
+
+    function GetConfigurations() {
+        $.ajax({
+            type: 'GET',
+            url: '/Home/GetConfigurationsFromLibrary',
+            success: function (data) {
+                $('#testConfigurations').show();
+                $('#lblSiteName').text(data.siteName);
+                $('#lblMaxItemCount').text(data.maxItemCount);
+                $('#lblIsBasketEnabled').text(data.isBasketEnabled);
+
+                var dt = new Date();
+                var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+                $('#lblTime').text(time);
+            },
+            error: function () {
+                alert('An error occured.')
+            }
+        })
+    };
+</script>

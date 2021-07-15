@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\DynamicConfiguration.Application\DynamicConfiguration.Application.csproj" />
+    <ProjectReference Include="..\..\Libraries\DynamicConfiguration.ConfigurationReader\DynamicConfiguration.ConfigurationReader.csproj" />
+    <ProjectReference Include="..\..\Libraries\DynamicConfiguration.Infrastructure\DynamicConfiguration.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
