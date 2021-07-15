@@ -5,5 +5,6 @@
         public string SiteName { get; set; }
         public int MaxItemCount { get; set; }
         public bool IsBasketEnabled { get; set; }
+        public string RefreshTimerIntervalInMs { get; set; }
     }
 }

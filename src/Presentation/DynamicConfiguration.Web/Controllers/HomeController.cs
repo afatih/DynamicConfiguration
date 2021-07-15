@@ -4,20 +4,25 @@ using DynamicConfiguration.Application.Configurations.Queries;
 using DynamicConfiguration.ConfigurationReader.Interface;
 using DynamicConfiguration.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
 namespace DynamicConfiguration.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly IDynamicConfigurationProvider _beymenConfigurationProvider;
+        private readonly IDynamicConfigurationProvider _dynamicConfigurationProvider;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(IDynamicConfigurationProvider beymenConfigurationProvider,
-            IMapper mapper)
+        public HomeController(
+            IDynamicConfigurationProvider beymenConfigurationProvider,
+            IMapper mapper,
+            IConfiguration configuration)
         {
-            _beymenConfigurationProvider = beymenConfigurationProvider;
+            _dynamicConfigurationProvider = beymenConfigurationProvider;
             _mapper = mapper;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -83,9 +88,10 @@ namespace DynamicConfiguration.Web.Controllers
         {
             var configurations = new ConfigurationsFromLibrary
             {
-                SiteName = await _beymenConfigurationProvider.GetValue<string>("SiteName"),
-                MaxItemCount = await _beymenConfigurationProvider.GetValue<int>("MaxItemCount"),
-                IsBasketEnabled = await _beymenConfigurationProvider.GetValue<bool>("IsBasketEnabled")
+                SiteName = await _dynamicConfigurationProvider.GetValue<string>("SiteName"),
+                MaxItemCount = await _dynamicConfigurationProvider.GetValue<int>("MaxItemCount"),
+                IsBasketEnabled = await _dynamicConfigurationProvider.GetValue<bool>("IsBasketEnabled"),
+                RefreshTimerIntervalInMs = _configuration.GetSection("ConfigurationSettings:RefreshTimerIntervalInMs").Value
             };
 
             return Json(configurations);

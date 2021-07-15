@@ -77,6 +77,9 @@
                 <label>Call Time: </label><label id="lblTime"></label>
             </div>
             <div>
+                <label>Refresh Cache in  *</label><label id="lblTimer"></label>
+            </div>
+            <div>
                 <label><b>Site Name : </b></label><label id="lblSiteName"></label>
             </div>
             <div>
@@ -130,6 +133,7 @@
                 $('#lblSiteName').text(data.siteName);
                 $('#lblMaxItemCount').text(data.maxItemCount);
                 $('#lblIsBasketEnabled').text(data.isBasketEnabled);
+                $('#lblTimer').text(' ' + data.refreshTimerIntervalInMs + ' ms');
 
                 var dt = new Date();
                 var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();

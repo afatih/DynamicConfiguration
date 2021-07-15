@@ -3,6 +3,7 @@ using DynamicConfiguration.ConfigurationReader.Interface;
 using DynamicConfiguration.ConfigurationReader.Model;
 using DynamicConfiguration.Core.Entities;
 using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -14,7 +15,7 @@ namespace DynamicConfiguration.ConfigurationReader.Implementation
 {
     public class SqlServerConfigurationProvider : IDynamicConfigurationProvider
     {
-        private const string CacheKey = "BeymenConfigurations";
+        private const string CacheKeyPrefix = "DynamicConfigurations";
         private readonly IMemoryCache _memoryCache;
         private readonly Timer _timer;
         private readonly DynamicConfigurationProviderOptions _options;
@@ -31,7 +32,7 @@ namespace DynamicConfiguration.ConfigurationReader.Implementation
 
         public async Task<T> GetValue<T>(string key)
         {
-            var config = await GetSettingsAsync(key);
+            var config = await GetSettingsFromCacheAsync(key);
             if (config == null)
             {
                 //In this part, an error can be thrown or a log record can be made to the db.
@@ -64,10 +65,16 @@ namespace DynamicConfiguration.ConfigurationReader.Implementation
             {
                 using var sqlConnection = new SqlConnection(_options.ConnectionString);
 
-                var result = await sqlConnection.QueryAsync<Configuration>("SELECT * FROM Configurations where ApplicationName=@ApplicationName and IsActive=1",
-                    new { ApplicationName = new DbString { Value = _options.ApplicationName } });
+                var result = (await sqlConnection.QueryAsync<Configuration>("SELECT * FROM Configurations where ApplicationName=@ApplicationName and IsActive=1",
+                    new { ApplicationName = new DbString { Value = _options.ApplicationName } })).ToList();
 
-                _memoryCache.Set(CacheKey, result);
+                var cachedResult = _memoryCache.Get<List<Configuration>>($"{CacheKeyPrefix}_{_options.ApplicationName}");
+
+                //Update cache if there is something added or changed.
+                if (JsonConvert.SerializeObject(result) != JsonConvert.SerializeObject(cachedResult))
+                {
+                    _memoryCache.Set($"{CacheKeyPrefix}_{_options.ApplicationName}", result);
+                }
             }
             catch (Exception ex)
             {
@@ -75,29 +82,9 @@ namespace DynamicConfiguration.ConfigurationReader.Implementation
             }
         }
 
-        private async Task<Configuration> GetSettingsAsync(string key)
+        private async Task<Configuration> GetSettingsFromCacheAsync(string key)
         {
-            var configuration = new Configuration();
-            try
-            {
-                using var sqlConnection = new SqlConnection(_options.ConnectionString);
-
-                configuration = (await sqlConnection.QueryAsync<Configuration>
-                    ("SELECT * FROM Configurations where ApplicationName=@ApplicationName and Name=@Name and IsActive=1",
-                    new
-                    {
-                        ApplicationName = new DbString { Value = _options.ApplicationName },
-                        Name = new DbString { Value = key }
-                    })).FirstOrDefault();
-
-                return configuration;
-            }
-            catch
-            {
-                configuration = _memoryCache.Get<List<Configuration>>(CacheKey).FirstOrDefault(c => c.Name == key);
-            }
-
-            return configuration;
+            return _memoryCache.Get<List<Configuration>>($"{CacheKeyPrefix}_{_options.ApplicationName}").FirstOrDefault(c => c.Name == key);
         }
     }
 }

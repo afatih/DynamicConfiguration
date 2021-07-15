@@ -4,7 +4,6 @@ namespace DynamicConfiguration.ConfigurationReader.Interface
 {
     public interface IDynamicConfigurationProvider
     {
-
         Task<T> GetValue<T>(string key);
     }
 }
