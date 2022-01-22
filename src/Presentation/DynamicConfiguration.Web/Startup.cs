@@ -1,15 +1,11 @@
 using DynamicConfiguration.Application;
-using DynamicConfiguration.ConfigurationReader.Implementation;
-using DynamicConfiguration.ConfigurationReader.Interface;
-using DynamicConfiguration.ConfigurationReader.Model;
+using DynamicConfiguration.ConfigurationReader;
 using DynamicConfiguration.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 
 namespace DynamicConfiguration.Web
 {
@@ -25,20 +21,7 @@ namespace DynamicConfiguration.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IDynamicConfigurationProvider>(factory =>
-            {
-                var memoryCache = factory.GetRequiredService<IMemoryCache>();
-                var options = new DynamicConfigurationProviderOptions
-                {
-                    ApplicationName = Configuration.GetSection("ConfigurationSettings:ApplicationName").Value,
-                    ConnectionString = Configuration.GetSection("ConfigurationSettings:ConnectionString").Value,
-                    RefreshTimerIntervalInMs = Convert.ToDouble
-                        (Configuration.GetSection("ConfigurationSettings:RefreshTimerIntervalInMs").Value)
-                };
-                return new SqlServerConfigurationProvider(memoryCache, options);
-            });
-
-
+            services.AddConfigurationReader(Configuration);
             services.AddControllersWithViews();
             services.AddApplication();
             services.AddInfrastructure();
